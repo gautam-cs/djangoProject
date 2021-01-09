@@ -31,6 +31,8 @@ Step 3 - install pip requirements
 
 Step 4 - Run the app server
 ```Shell
+    python manage.py makemigrations
+    python manage.py migrate
     python manage.py runserer
 ```
 
