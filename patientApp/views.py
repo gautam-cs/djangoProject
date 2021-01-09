@@ -16,7 +16,7 @@ class PatientList(APIView):
     """
 
     def get(self, request, format=None):
-        snippets = Patient.objects.all()
+        snippets = Patient.objects.all().order_by('-updated_at')
         serializer = PatientSerializer(snippets, many=True)
         return Response(serializer.data)
 
