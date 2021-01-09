@@ -1,3 +1,46 @@
+# Getting Started with Django Backend App
+## Stack
+1. Python
+2. Django
+
+## Run
+
+Step 1 - Git clone the repository 
+```Shell
+    git clone https://github.com/gautam-cs/djangoProject
+    cd djangoProject
+```
+
+Step-2: Create Environment and activate it
+```
+  - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O anaconda.sh;
+  - bash anaconda.sh -b -p $HOME/anaconda
+  - export PATH="$HOME/anaconda/bin:$PATH"
+  - conda update -q conda
+  - conda create -y --name djangoProject python=3.8.5
+  - source activate djangoProject
+```
+
+
+Step 3 - install pip requirements
+```Shell
+    pip install -r requiremets.txt
+```
+
+
+
+Step 4 - Run the app server
+```Shell
+    python manage.py runserer
+```
+
+
+NOTE: Once you have the server up and running you can open the following url in a browser
+```
+    http://localhost:8000
+```
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

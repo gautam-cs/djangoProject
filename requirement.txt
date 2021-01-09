@@ -1,0 +1,5 @@
+certifi==2020.12.5
+django-phonenumber-field==5.0.0
+djangorestframework==3.12.2
+phonenumbers==8.12.15
+Pygments==2.7.3
