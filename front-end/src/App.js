@@ -5,13 +5,18 @@ import Pagination from "./components/Pagination";
 import React, {useState, useEffect} from 'react';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'react-phone-number-input/style.css'
+
 
 function App() {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [postPerPage] = useState(10);
-
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [gender, setGender] = useState(null)
+    const [phoneNumber, setPhoneNumber] = useState(null)
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -23,11 +28,31 @@ function App() {
         fetchPosts();
     }, []);
 
-    function myChangeHandler(event) {
-        this.setState({username: event.target.value});
+    function setFN(event) {
+        setFirstName(event.target.value);
     }
+
+    function setLN(event) {
+        setLastName(event.target.value);
+    }
+
+    function setGenders(event) {
+        setGender(event.target.value);
+    }
+
+    function setPhone(event) {
+        setPhoneNumber('+91' + event.target.value);
+    }
+
     function handleOnSubmit(event) {
-        console.log("hello")
+        const patientData = {
+            "first_name": firstName,
+            "last_name": lastName,
+            "gender": gender,
+            "phone": phoneNumber
+        }
+        const resp = axios.post("http://localhost:8000/patients/", patientData)
+        console.log(resp)
     }
 
 
@@ -43,13 +68,14 @@ function App() {
         <div>
             <div className="container mt-5">
                 <form onSubmit={handleOnSubmit}>
-                    <h3>Submit New patient Details</h3>
+                    <h3>Add New patient</h3>
                     <div className={"row"}>
                         <div className={"col-sm-2"}>
                             <p>First Name:</p>
                             <input
                                 type='text'
-                                onChange={myChangeHandler}
+                                onChange={setFN}
+                                required
                             />
                         </div>
                         <div className={"col-sm-1"}></div>
@@ -57,27 +83,37 @@ function App() {
                             <p>Last Name:</p>
                             <input
                                 type='text'
-                                onChange={myChangeHandler}
+                                onChange={setLN}
                             />
                         </div>
                         <div className={"col-sm-1"}></div>
-                        <div className={"col-sm-2"}>
+                        <div className={"col-sm-1"}>
                             <p>Gender:</p>
-                            <input
-                                type='text'
-                                onChange={myChangeHandler}
-                            />
+                            <select style={{height: 30, textAlign: "left", marginRight: 5}}
+                                    onChange={setGenders}
+                                    required
+                            >
+                                <option value="">None</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Others">Others</option>
+                            </select>
                         </div>
                         <div className={"col-sm-1"}></div>
                         <div className={"col-sm-2"}>
                             <p>Phone no:</p>
-                            <input
-                                type='text'
-                                onChange={myChangeHandler}
-                            />
+                            <input type="tel" id="phone" name="phone" onChange={setPhone}
+                                   pattern="[1-9]{1}[0-9]{9}"
+                                   required/>
+                            <small>Format: 1234567890</small>
                         </div>
+                        <div className={"col-sm-1"}></div>
+                        <div className={"col-sm-1"}>
+                            <button style={{marginTop: 37}} type="submit">Submit</button>
+                        </div>
+
                     </div>
-                    <button type="submit">Submit</button>
+
                 </form>
             </div>
             <div className="container mt-5">
